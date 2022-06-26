@@ -1,0 +1,215 @@
+import copy
+from logging import exception
+from random import randint
+from time import *
+import dispatch as dp
+
+i = 0
+
+list_match, list_match_copy = [], []
+
+
+class match_info:
+    list_match = None
+
+    def __init__(self, identifiant, premier_equipe, seconde_equipe, score_equipe1, score_equipe2):
+        text = "enregistrement de donnees d'une match".capitalize()
+        progressPoint = '......'
+        print(text, end="")
+        letter_by_letter(progressPoint*5)
+
+        self.id1 = identifiant
+        self.preE = premier_equipe
+        self.secoE = seconde_equipe
+        self.sco1 = score_equipe1
+        self.sco2 = score_equipe2
+
+    #
+    # methode de la classe match_info pour generer les identifiant de la classe
+    #
+    def atribution(cls):
+        match_info.id_match = randint(1000000, 10000000)
+        return match_info.id_match
+
+    atribution1 = classmethod(atribution)
+
+    def Mk_list(cls, self):
+        match_info.list_match.append(self)
+        return match_info.list_match
+
+
+# fonction pour faire les affectation des valeurs de la classe match_info
+def affectation():
+    while True:
+        print("<>" * 50)
+
+        print("Entrer le nom de la premiere equipe  : ", end="")
+        NomE1 = input().upper()
+        while NomE1 == '':
+            print(f"le nom \'{NomE1}\' que vous avez Entrer n'est pas Valide ", end="")
+            NomE1 = input().upper()
+
+        print("Entrer le nom de la seconde equipe  :", end="")
+        NomE2 = input().upper()
+        while NomE2 == '':
+            print(f"le nom \'{NomE2}\' que vous avez Entrer n'est pas Validd ", end="")
+            NomE2 = input().upper()
+
+        print("Entrer le score de la premiere equipe :  ", end="")
+        try:
+            Scoe1 = int(input())
+            while Scoe1 < 0:
+                print("le Score ne peut Pas etre inferieur a 0  :", end="")
+                Scoe1 = int(input())
+        except:
+            print("le score ne peut pas etre une chaine de caracter")
+            sleep(1)
+            print("\rVeuillez re-saisire le Score  :  ", end="")
+            Scoe1 = int(input())
+            while type(Scoe1) is not int:
+                print("\rVeuillez re-saisire le Score  :  ", end="")
+                Scoe1 = int(input())
+
+        print("Entrer le score de la deuxieme equipe :  ", end="")
+        try:
+            Scoe2 = int(input())
+            while Scoe2 < 0:
+                print("le Score ne peut Pas etre inferieur a 0  :", end="")
+                Scoe2 = int(input())
+        except:
+            print("le score ne peut pas etre une chaine de caracter")
+            sleep(1)
+            print("\rVeuillez re-saisire le Score  :  ", end="")
+            Scoe1 = int(input())
+            while type(Scoe2) is not int:
+                print("\rVeuillez re-saisire le Score  :  ", end="")
+                Scoe2 = int(input())
+
+        MatchInfo: match_info = match_info(match_info.atribution(randint(1000000, 10000000)), NomE1, NomE2, Scoe1,
+                                           Scoe2)
+        global list_match
+        list_match.append(MatchInfo)
+        sleep(2)
+
+        print(f"""\r
+            les donnees du match ont bien ete enregistrer 
+
+            Id                                           : {MatchInfo.id1}
+            Premier Equipe               : {MatchInfo.preE}
+            Seconnd Equipe               : {MatchInfo.secoE}
+            Score finale                        : {MatchInfo.sco1} : {MatchInfo.sco2}
+            """)
+        print('voulez vous enregistrer d\'autre match  "(O) Oui : (N) Non"  :', end="")
+        rep: str = input().capitalize()
+        if rep == "OUI" or rep == "O":
+            affectation()
+        elif rep == "NON" or rep == "N":
+            dp.match_data()
+
+
+def affichage():
+    i1 = 0
+    titre = "affichage de la liste des matchs".title()
+    for i in range(len(titre)):
+        sleep(0.1)
+        print(titre[i], end="")
+    for MatchInfo in list_match:
+        sleep(1)
+        print(f"""\r
+            Match :{i1} 
+
+            Id                                           : {MatchInfo.id1}
+            Premier Equipe               : {MatchInfo.preE}
+            Seconnd Equipe               : {MatchInfo.secoE}
+            Score finale                        : {MatchInfo.sco1} : {MatchInfo.sco2}
+            
+            """)
+        i1 += 1
+        print("-" * 90)
+
+
+def testList():
+    test = None
+    if len(list_match) > 0:
+        test = True
+    else:
+        test = False
+    return test
+
+
+def sup_id(supId):
+    global list_match_copy
+    rep = ''
+    for MatchInfo in list_match:
+        print(MatchInfo.id1)
+        if MatchInfo.id1==int(supId):
+            print(f"""Voulez vous vraiment supprimer l'objet ({MatchInfo.id1}) ?
+            Pressez (O) pour "oui" (N) pour "non" :
+            """, end="")
+            rep = input().upper()
+            while not (rep.isalpha()):
+                print("la reponse n\'est pas correcte ,(O)Oui ,(N)Non  :")
+                rep = input().upper()
+            if "OUI" == rep or rep == "O":
+                list_match.remove(MatchInfo)
+            elif rep == "NON" or rep == "N":
+                print(f"vous avez choisi {rep}".title())
+                sleep(2)
+                dp.match_data()
+            else:
+                print(" \u274C  reponse invalide !!!".upper())
+                sleep(2)
+                dp.match_data()
+            print(f"{MatchInfo.id1}=={supId}")
+        else:
+            print("oups")
+        # if supId != MatchInfo.id1:
+            # print(f"""l\'Id ( {supId} ) que vous avez saisie n\'est pas reconnue
+            # voulez vous en saisir une autre ? (O)oui (N)non :
+            # """, end="")
+            # rep = input().upper()
+            # while not (rep.isalpha()):
+            #     print("la reponse n\'est pas correcte ,(O)Oui ,(N)Non  :")
+            #     rep = input().upper()
+            # if "OUI" == rep or rep == "O":
+            #     suppression()
+            # elif rep == "NON" or rep == "N":
+            #     sleep(2)
+            #     dp.match_data()
+            # else:
+            #     print(" \u274C  reponse invalide !!!".upper())
+            #     sleep(2)
+            #     dp.match_data()
+        # elif supId == MatchInfo.id1:
+        #     print(type(MatchInfo.id1))
+        #     print(' \u23F3 suppresion en cour ...'.capitalize())
+        #     sleep(2)
+        #     list_match.remove(MatchInfo)
+        #     print("suppression termine \u2705")
+        #     dp.match_data()
+
+
+# ============================================================================================================================
+# ============================================================================================================================
+# ============================================================================================================================
+def suppression():
+    sup_id1 = ''
+    prin = "suppression de match".title()
+    letter_by_letter(prin)
+    if testList() == True:
+        sleep(2)
+        while not (sup_id1.isdigit()):
+            sup_id1 = input("\rveuillez saisir l\'identifiant du match a supprimer  : ")
+    else:
+        sleep(2)
+        letter_by_letter("\roups la liste est vide".upper())
+        sleep(2)
+        dp.match_data()
+    sup_id(sup_id1)
+
+
+def letter_by_letter(chare):
+    prin = chare
+    for cha in range(len(prin)):
+        print(prin[cha], end="")
+        sleep(0.1)
