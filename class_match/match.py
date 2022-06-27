@@ -152,6 +152,7 @@ def sup_id(supId):
                 rep = input().upper()
             if "OUI" == rep or rep == "O":
                 list_match.remove(MatchInfo)
+
             elif rep == "NON" or rep == "N":
                 print(f"vous avez choisi {rep}".title())
                 sleep(2)
@@ -160,33 +161,12 @@ def sup_id(supId):
                 print(" \u274C  reponse invalide !!!".upper())
                 sleep(2)
                 dp.match_data()
-            print(f"{MatchInfo.id1}=={supId}")
+            # print(f"{MatchInfo.id1}=={supId}")
         else:
-            print("oups")
-        # if supId != MatchInfo.id1:
-            # print(f"""l\'Id ( {supId} ) que vous avez saisie n\'est pas reconnue
-            # voulez vous en saisir une autre ? (O)oui (N)non :
-            # """, end="")
-            # rep = input().upper()
-            # while not (rep.isalpha()):
-            #     print("la reponse n\'est pas correcte ,(O)Oui ,(N)Non  :")
-            #     rep = input().upper()
-            # if "OUI" == rep or rep == "O":
-            #     suppression()
-            # elif rep == "NON" or rep == "N":
-            #     sleep(2)
-            #     dp.match_data()
-            # else:
-            #     print(" \u274C  reponse invalide !!!".upper())
-            #     sleep(2)
-            #     dp.match_data()
-        # elif supId == MatchInfo.id1:
-        #     print(type(MatchInfo.id1))
-        #     print(' \u23F3 suppresion en cour ...'.capitalize())
-        #     sleep(2)
-        #     list_match.remove(MatchInfo)
-        #     print("suppression termine \u2705")
-        #     dp.match_data()
+            pprint1=f"apres la recherche l\'objet {supId} n\'a pas ete trouve".title()
+            letter_by_letter(pprint1)
+            sleep(2)
+            dp.match_data()
 
 
 # ============================================================================================================================
