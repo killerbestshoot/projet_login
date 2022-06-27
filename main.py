@@ -8,5 +8,4 @@ if __name__ == '__main__':
         e = "-" * i
     print(e)
     sleep(1)
-    #aut.auth()
-    dispatch.match_data()
+    aut.auth()

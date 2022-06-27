@@ -46,13 +46,15 @@ def affectation():
         print("Entrer le nom de la premiere equipe  : ", end="")
         NomE1 = input().upper()
         while NomE1 == '':
-            print(f"le nom \'{NomE1}\' que vous avez Entrer n'est pas Valide ", end="")
+            print(
+                f"le nom \'{NomE1}\' que vous avez Entrer n'est pas Valide ", end="")
             NomE1 = input().upper()
 
         print("Entrer le nom de la seconde equipe  :", end="")
         NomE2 = input().upper()
         while NomE2 == '':
-            print(f"le nom \'{NomE2}\' que vous avez Entrer n'est pas Validd ", end="")
+            print(
+                f"le nom \'{NomE2}\' que vous avez Entrer n'est pas Validd ", end="")
             NomE2 = input().upper()
 
         print("Entrer le score de la premiere equipe :  ", end="")
@@ -106,9 +108,10 @@ def affectation():
         elif rep == "NON" or rep == "N":
             dp.match_data()
 
+#fonction pour faire l'affichage des donnees
 
 def affichage():
-    i1 = 0
+    i1 = 1
     titre = "affichage de la liste des matchs".title()
     for i in range(len(titre)):
         sleep(0.1)
@@ -127,7 +130,7 @@ def affichage():
         i1 += 1
         print("-" * 90)
 
-
+#fonction pour test le liste des objets si vide ou pas
 def testList():
     test = None
     if len(list_match) > 0:
@@ -136,13 +139,15 @@ def testList():
         test = False
     return test
 
-
+#fonction pour supprimer les objets match qui prend en parametre un entier (l'identifiant)
 def sup_id(supId):
     global list_match_copy
+    test = False
     rep = ''
     for MatchInfo in list_match:
         print(MatchInfo.id1)
-        if MatchInfo.id1==int(supId):
+        if MatchInfo.id1 == int(supId):
+
             print(f"""Voulez vous vraiment supprimer l'objet ({MatchInfo.id1}) ?
             Pressez (O) pour "oui" (N) pour "non" :
             """, end="")
@@ -154,24 +159,32 @@ def sup_id(supId):
                 list_match.remove(MatchInfo)
 
             elif rep == "NON" or rep == "N":
-                print(f"vous avez choisi {rep}".title())
+                #print(f"vous avez choisi {rep}".title())
                 sleep(2)
                 dp.match_data()
             else:
                 print(" \u274C  reponse invalide !!!".upper())
                 sleep(2)
                 dp.match_data()
-            # print(f"{MatchInfo.id1}=={supId}")
-        else:
-            pprint1=f"apres la recherche l\'objet {supId} n\'a pas ete trouve".title()
-            letter_by_letter(pprint1)
-            sleep(2)
-            dp.match_data()
+            test = True
+    if test == bool(False):
+        for MatchInfo in list_match:
+            if MatchInfo.id1 != int(supId):
+                # print(f"{MatchInfo.id1}!={supId}")
+                pprint1 = f"apres la recherche l\'objet {supId} n\'a pas ete trouve".title(
+                )
+                letter_by_letter(pprint1)
+                sleep(2)
+                dp.match_data()
 
 
 # ============================================================================================================================
 # ============================================================================================================================
 # ============================================================================================================================
+
+# fonction pour supprimer un match de la liste des match 
+#il effectue un appel a la fonction sup_id() 
+# et a la fonction test pour verifier si la liste n'est pas vide
 def suppression():
     sup_id1 = ''
     prin = "suppression de match".title()
@@ -179,7 +192,8 @@ def suppression():
     if testList() == True:
         sleep(2)
         while not (sup_id1.isdigit()):
-            sup_id1 = input("\rveuillez saisir l\'identifiant du match a supprimer  : ")
+            sup_id1 = input(
+                "\rveuillez saisir l\'identifiant du match a supprimer  : ")
     else:
         sleep(2)
         letter_by_letter("\roups la liste est vide".upper())
@@ -187,7 +201,7 @@ def suppression():
         dp.match_data()
     sup_id(sup_id1)
 
-
+# fonction pour l'affichage character par character
 def letter_by_letter(chare):
     prin = chare
     for cha in range(len(prin)):

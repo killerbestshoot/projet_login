@@ -2,6 +2,7 @@ from time import *
 from random import randint
 import dispatch as sp
 import donnee_utilisateur as du
+from class_match import match as mt
 
 user, passw, username, salutation = '', '', '', ''
 test = None
@@ -34,11 +35,7 @@ def say_hello(username, tm_par=time_watcher()):
                                                                                                                         Zone de Connection                         :  {localtime().tm_zone}
                                                                                                                         Id de Connection                               :  {salutation[0] + username[0:2].upper() + str(connection_id())}
                                                                                                                          """
-    i = 0
-    for i in range(len(titre)):
-        if titre[i]!=''or titre[i].isspace()==False:
-            sleep(0.1)
-            print(titre[i], end="")
+    mt.letter_by_letter(titre)
     print("")
     print("-" * 200)
 
@@ -49,7 +46,7 @@ def auth() -> object:
     print("Entrer votre nom utilisateur  : ", end="")
     username = input()
     user = du.check_username(username)
-    while user!=True:
+    while user != True:
         username = input()
         user = du.check_username(username)
     print("Entrer votre mot de pass  :  ", end="")
@@ -58,7 +55,8 @@ def auth() -> object:
     if user != True or passw != True:
         test = False
         while test != True:
-            print('\n l\'utilisateur est inactive OU mot de passe incorrect  \n'.capitalize())
+            print(
+                '\n l\'utilisateur est inactive OU mot de passe incorrect  \n'.capitalize())
             auth()
     elif user == True and passw == True:
         test = True
