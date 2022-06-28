@@ -1,6 +1,28 @@
+from class_match import match as mt
+import dispatch as dp
 liste_utilisateur = {'Bastien': 'inactive', 'Steph': 'active', 'Louis': 'active'}
 liste_utilisateur_pass = ["1804", "1998"]
 liste_utilisateur_verify={}
+
+
+#fonction pour afficher les utilisateur
+def listing_user():
+    test=None
+    i=1
+    if len(liste_utilisateur) <=0:
+        test=False
+        mesg="il n\'y pas d'utilisateur dans la base de donnee".title()
+        mt.letter_by_letter(mesg,test)
+        sleep(3)
+        dp.user_match_data()
+    else:
+        test=True
+        print("# -> nom_utilisateur  |   etat".upper())
+        for username,status in liste_utilisateur.items():
+            outf=f"{i} -> {username}    :   {status}\n"
+            mt.letter_by_letter(outf,test)
+        ter=f"\u2714 un total de {i} utilisateur(s) a ete affiche".title()
+        mt.letter_by_letter(ter,test=True)
 
 #Fonction pour verifier l'existance de l'utilisateur dans la base de donne
 def check_username(username):

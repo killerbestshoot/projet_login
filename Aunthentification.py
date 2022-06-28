@@ -1,7 +1,8 @@
+from re import T
 from time import *
 from random import randint
 import dispatch as sp
-import donnee_utilisateur as du
+import donne_utilisateur.donnee_utilisateur as du
 from class_match import match as mt
 
 user, passw, username, salutation = '', '', '', ''
@@ -35,7 +36,7 @@ def say_hello(username, tm_par=time_watcher()):
                                                                                                                         Zone de Connection                         :  {localtime().tm_zone}
                                                                                                                         Id de Connection                               :  {salutation[0] + username[0:2].upper() + str(connection_id())}
                                                                                                                          """
-    mt.letter_by_letter(titre)
+    mt.letter_by_letter(titre,test)
     print("")
     print("-" * 200)
 

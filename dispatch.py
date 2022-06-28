@@ -1,4 +1,4 @@
-import donnee_utilisateur as du
+import donne_utilisateur.donnee_utilisateur as du
 from class_match import match as m
 import sys
 
@@ -27,7 +27,28 @@ def match_data():
             elif user_choice=='4':
                 dispatcher()
             
-
+def user_match_data():
+    Menue="""
+    1:Afficher les utilisateur 
+    2:Ajouter un utilisateur 
+    3:Supprimer un utilisateur
+    4:Menue Precedent 
+    Faite votre Choix  : """
+    choice_posi=['1','2','3','4']
+    while True:
+        user_choic=''
+        while user_choic not in choice_posi:
+            user_choic=input(Menue)
+            if user_choic=='1':
+                du.listing_user()
+            elif user_choic=='2':
+                pass
+            elif user_choic=='3':
+                pass
+            elif user_choic=='4':
+                pass
+            else:
+                message="Veuillez faire une choix valide".upper()
                 
 
 
@@ -48,6 +69,7 @@ def dispatcher():
                 match_data()
             elif user_choice == '2':
                 print('*' * 10, '            Gestion des Utilisateur                 ', '*' * 10)
+                user_match_data()
             elif user_choice == '3':
                 sys.exit()
             else:
