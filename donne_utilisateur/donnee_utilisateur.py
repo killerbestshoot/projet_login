@@ -27,7 +27,7 @@ def listing_user():
             outf = f"{i} -> {username}    :   {status}\n"
             mt.letter_by_letter(outf, test)
             i += 1
-        ter = f"\u2714 un total de {i} utilisateur(s) a ete affiche\n".title()
+        ter = f"\u2714 un total de {i-1} utilisateur(s) a ete affiche\n".title()
         mt.letter_by_letter(ter, test=True)
         sleep(2)
 
