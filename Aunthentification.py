@@ -1,6 +1,7 @@
+from random import randint
 from re import T
 from time import *
-from random import randint
+
 import dispatch as sp
 import donne_utilisateur.donnee_utilisateur as du
 from class_match import match as mt
@@ -36,33 +37,32 @@ def say_hello(username, tm_par=time_watcher()):
                                                                                                                         Zone de Connection                         :  {localtime().tm_zone}
                                                                                                                         Id de Connection                               :  {salutation[0] + username[0:2].upper() + str(connection_id())}
                                                                                                                          """
-    mt.letter_by_letter(titre,test)
+    mt.letter_by_letter(titre, test)
     print("")
     print("-" * 200)
 
 
 # fonction pour authentifier l'utilisateur qui essaie de se connecter
 def auth() -> object:
-    global user, passw, username, test
-    print("Entrer votre nom utilisateur  : ", end="")
-    username = input()
-    user = du.check_username(username)
-    while user != True:
-        username = input()
-        user = du.check_username(username)
+    global user, passw, test
+    print("\n\rEntrer votre nom utilisateur  : ", end="")
+    user = input()
     print("Entrer votre mot de pass  :  ", end="")
-    passw = du.check_userpass(input())
+    passw = input()
+
     # test de l'idantifiant de l'utilisateur
-    if user != True or passw != True:
+    if du.check_username_and_pass(user, passw) != bool(True):
         test = False
         while test != True:
             print(
-                '\n l\'utilisateur est inactive OU mot de passe incorrect  \n'.capitalize())
+                '\n l\'utilisateur est inactive ou mot de passe incorrect  \n'.capitalize())
             auth()
-    elif user == True and passw == True:
+    elif du.check_username_and_pass(user, passw) == bool(True):
         test = True
+        msg = "connection reussi \u2714".title()
+        mt.letter_by_letter(msg, test)
         sleep(1)
-        say_hello(username)
+        say_hello(user)
         sleep(1)
         sp.dispatcher()
         return test

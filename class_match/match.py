@@ -207,7 +207,8 @@ def letter_by_letter(chare,test):
         for cha in range(len(chare)):
             print(chare[cha], end="")
             sleep(0.1)
-    else:
+    elif test!=bool(True):
         for cha in range(len(chare)):
-            print(chare[cha],end="")
+            print(chare[cha], end="")
             sleep(0.1)
+        
