@@ -22,7 +22,7 @@ def time_watcher():
     return temps
 
 
-# fonction Pour saluuer l'utilisateur connected
+# fonction Pour saluer l'utilisateur connected
 def say_hello(username, tm_par=time_watcher()):
     global salutation
     if tm_par >= 12 and tm_par <= 23:
@@ -34,8 +34,8 @@ def say_hello(username, tm_par=time_watcher()):
     titre = f"""\
     {salutation} a vous {username}
                                                                                                                         l'heure de la connection est          :  {strftime('%H:%M:%S', localtime())}
-                                                                                                                        Zone de Connection                         :  {localtime().tm_zone}
-                                                                                                                        Id de Connection                               :  {salutation[0] + username[0:2].upper() + str(connection_id())}
+                                                                                                                        Zone de Connection                    :  {localtime().tm_zone}
+                                                                                                                        Id de Connection                      :  {salutation[0] + username[0:2].upper() + str(connection_id())}
                                                                                                                          """
     mt.letter_by_letter(titre, test)
     print("")
